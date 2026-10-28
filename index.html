@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Полёт наружу: факты о космосе</title>
+<style>
+:root{--bg:#0b1030;--sf:#151b4a;--ln:#2b3380;--tx:#e9e7f5;--mu:#a9a8c9;--ac:#f3c969;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:400;line-height:1.15;margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ac);outline-offset:3px}
+header{position:sticky;top:0;z-index:5;background:rgba(11,16,48,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--ln);padding:8px 16px;display:flex;flex-wrap:wrap;gap:4px 18px;align-items:center;justify-content:space-between}
+nav{display:flex;gap:2px 14px;flex-wrap:wrap;font-size:14px}
+nav a{text-decoration:none;color:var(--mu);padding:4px 0}
+nav a:hover,nav a.on{color:var(--ac)}
+#dist{font-size:14px;color:var(--mu)}
+#dist b{color:var(--ac);font-weight:600}
+.hero{position:relative;min-height:88vh;display:grid;place-items:center;text-align:center;padding:40px 20px;overflow:hidden}
+#sky{position:absolute;inset:0;width:100%;height:100%}
+.hero div{position:relative;max-width:720px}
+.hero h1{font-size:clamp(40px,8vw,84px)}
+.hero p{color:var(--mu);font-size:19px;margin:20px 0 30px}
+.btn{display:inline-block;background:var(--ac);color:#1a1530;text-decoration:none;padding:13px 26px;border-radius:99px;font-weight:600;border:0;font-size:16px;cursor:pointer}
+section{padding:72px 20px 24px;max-width:1180px;margin:0 auto}
+section>h2{font-size:clamp(30px,5vw,48px)}
+section>p.in{color:var(--mu);max-width:60ch;margin:12px 0 32px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px}
+.strip{display:flex;overflow-x:auto;gap:18px;padding-bottom:16px;scroll-snap-type:x proximity}
+.strip .card{flex:0 0 280px;scroll-snap-align:start}
+.card{background:var(--sf);border:1px solid var(--ln);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px}
+.orb{width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 32% 30%,var(--a),var(--b) 70%);box-shadow:0 0 28px -4px var(--b)}
+.card h3{font-size:24px}
+.st{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.st li{font-size:13px;color:var(--mu);border:1px solid var(--ln);border-radius:99px;padding:2px 10px}
+.hook{margin:0}
+details{margin-top:auto}
+summary{cursor:pointer;color:var(--ac);font-size:15px;padding:4px 0}
+details p{margin:8px 0 0;color:var(--mu);font-size:16px}
+.rec{background:var(--sf);border:1px solid var(--ln);border-radius:14px;padding:24px;max-width:680px}
+.rec h3{font-size:22px;margin-bottom:14px}
+.opts{display:grid;gap:8px}
+.opts button{font:inherit;text-align:left;background:var(--bg);color:var(--tx);border:1px solid var(--ln);border-radius:10px;padding:10px 14px;cursor:pointer}
+.opts button:hover:not(:disabled){border-color:var(--ac)}
+.opts .ok{border-color:#7be0a0;background:#12355a}
+.opts .no{border-color:#ff8a8a}
+#fb{min-height:26px;color:var(--mu);margin:12px 0}
+.voy{display:flex;flex-wrap:wrap;gap:18px;margin:32px 0 0}
+.voy p{margin:0;color:var(--mu);max-width:60ch}
+footer{text-align:center;color:var(--mu);font-size:14px;padding:60px 20px 40px}
+@media (max-width:640px){body{font-size:16px}header{padding:6px 12px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+.card{padding:0;overflow:hidden;gap:0;cursor:pointer;transition:border-color .2s}
+.card:hover{border-color:var(--a)}
+.card .body,dialog .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:12px}
+.pic{position:relative;aspect-ratio:16/9;background:#050818}
+.pic canvas,.pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.more{position:absolute;inset:0;display:flex;align-items:flex-end;padding:14px;background:linear-gradient(to top,rgba(5,8,24,.96) 15%,rgba(5,8,24,.55));opacity:0;transition:opacity .25s;color:#fff;font-size:14px;line-height:1.45}
+.more p{margin:0}
+@media(hover:hover){.card:hover .more,.card:focus-visible .more{opacity:1}}
+.st li{color:#fff;font-weight:600;font-size:13.5px;padding:4px 12px;border:1px solid var(--a);background:color-mix(in srgb,var(--b) 55%,transparent);box-shadow:0 0 12px -3px var(--a)}
+dialog{background:var(--sf);color:var(--tx);border:1px solid var(--ln);border-radius:16px;padding:0;width:min(760px,94vw);max-height:92vh;overflow:auto}
+dialog::backdrop{background:rgba(3,5,20,.82)}
+dialog h2{font-size:34px}
+dialog .full{margin:0;color:var(--mu)}
+.x{position:absolute;top:10px;right:10px;z-index:2;width:38px;height:38px;border-radius:50%;border:0;background:rgba(5,8,24,.75);color:#fff;font-size:22px;cursor:pointer}
+</style>
+</head>
+<body>
+<header>
+  <nav id="nav" aria-label="Разделы"></nav>
+  <div id="dist">Расстояние от Земли: <b>0</b></div>
+</header>
+
+<div class="hero" data-dist="0 — вы дома" id="top">
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div>
+    <h1>Полёт наружу</h1>
+    <p>От Солнца до самых далёких квазаров: короткие факты о космосе, от которых захватывает дух. Листайте вниз, и расстояния будут расти. Наведите курсор на карточку или нажмите на неё, чтобы узнать больше.</p>
+    <a class="btn" href="#sun">Начать полёт</a>
+  </div>
+</div>
+
+<main id="main"></main>
+
+<section id="records" data-dist="13 млрд световых лет и дальше">
+  <h2>Космос в рекордах</h2>
+  <p class="in">Последняя остановка: самые большие числа и проверка того, что вы запомнили.</p>
+  <div class="grid" id="recs"></div>
+  <div class="rec" style="margin-top:28px" id="quiz"></div>
+  <div class="voy"><p>В 1990 году «Вояджер-1» развернул камеру и сфотографировал Землю с расстояния около 6 млрд км. Она заняла на снимке меньше пикселя. Карл Саган назвал этот кадр «Бледно-голубой точкой» и написал о нём одну из самых известных страниц в истории науки.</p></div>
+</section>
+
+<dialog id="dlg" aria-label="Подробности"><button class="x" aria-label="Закрыть">×</button><div id="dc"></div></dialog>
+<footer>Прототип. Все данные округлены, а спорные гипотезы помечены словами «возможно» и «предполагается».</footer>
+
+<script>
+/* ===== Данные: [название, [цвет1, цвет2], [3 цифры], крючок, подробности] ===== */
+const S=[
+{id:"sun",t:"Солнечная система",d:"до 4,5 световых часов",strip:1,
+ i:"Наш дом: одна звезда, восемь планет и карликовая планета Плутон. Прокрутите ленту вбок.",
+ c:[
+ ["Солнце",["#fff3b0","#f08a1c"],["Диаметр 1 392 000 км","Поверхность 5 500 °C","Ядро 15 млн °C"],"В Солнце сосредоточено 99,86% всей массы Солнечной системы.","Свет Солнца добирается до нас за 8 минут 20 секунд. Звезде около 4,6 млрд лет."],
+ ["Меркурий",["#d9d2c8","#6f6a66"],["Диаметр 4 880 км","Год 88 суток","−180…+430 °C"],"Солнечные сутки на Меркурии (176 земных) длиннее его года.","Это самая маленькая планета и самая близкая к Солнцу. В тени полярных кратеров, несмотря на жару, лежит водяной лёд."],
+ ["Венера",["#f6dca0","#b5792b"],["Диаметр 12 100 км","Год 225 суток","465 °C"],"Венера горячее Меркурия, хотя находится дальше от Солнца.","Виноват парниковый эффект. Давление как на глубине около 900 м в океане, облака из серной кислоты, а вращается планета в обратную сторону. Сутки (243 земных) длиннее года."],
+ ["Земля",["#9ad4ff","#1b5fb0"],["Диаметр 12 742 км","Год 365 суток","В среднем +15 °C"],"Единственное известное место во Вселенной, где есть жизнь.","Океаны покрывают около 71% поверхности. Луна стабилизирует наклон земной оси, поэтому климат относительно стабилен."],
+ ["Марс",["#ffb38a","#a1401f"],["Диаметр 6 780 км","Год 687 суток","В среднем −60 °C"],"Гора Олимп выше Эвереста примерно в 2,5 раза: около 22 км.","Каньон Маринер тянется примерно на 4000 км. Красный цвет дают оксиды железа, то есть ржавчина. Спутник Фобос медленно снижается и через десятки миллионов лет разрушится."],
+ ["Юпитер",["#f2d9b8","#a8693a"],["Диаметр 139 800 км","Год 12 лет","−110 °C"],"Юпитер тяжелее всех остальных планет вместе взятых примерно в 2,5 раза.","Большое Красное Пятно, гигантский шторм, наблюдают более 150 лет. Под ледяной корой спутника Европа скрыт океан, возможно, пригодный для жизни."],
+ ["Сатурн",["#f6e6b4","#b99a54"],["Диаметр 116 500 км","Год 29 лет","−140 °C"],"Средняя плотность Сатурна меньше плотности воды.","Кольца из льда и камней шире планеты в десятки раз, но местами толщиной всего в десятки метров. На Энцеладе бьют ледяные гейзеры, а на Титане есть метановые озёра."],
+ ["Уран",["#c9f3f2","#4aa3b0"],["Диаметр 50 700 км","Год 84 года","До −224 °C"],"Уран «лежит на боку»: наклон его оси около 98°.","У него самая холодная атмосфера в системе."],
+ ["Нептун",["#9fb8ff","#2b3fb3"],["Диаметр 49 200 км","Год 165 лет","−200 °C"],"Ветры на Нептуне достигают 2000 км/ч, это рекорд системы.","Планету открыли в 1846 году «на кончике пера», по математическим расчётам. Вблизи её видел только «Вояджер-2» в 1989 году."],
+ ["Плутон",["#f1dcc8","#8c6a55"],["Диаметр 2 377 км","Год 248 лет","−230 °C"],"На Плутоне есть «сердце» из азотного льда.","С 2006 года Плутон считается карликовой планетой. Снимки в 2015 году сделал зонд «Новые горизонты»."]]},
+
+{id:"exo",t:"Далёкие и необычные миры",d:"от 40 световых лет",
+ i:"Подтверждено более 6000 экзопланет. Первую у обычной звезды (51 Пегаса b) нашли в 1995 году, а в 2019-м за это дали Нобелевскую премию.",
+ c:[
+ ["55 Рака e",["#ffffff","#6b6e8f"],["41 световой год","Вдвое больше Земли","Год 18 часов"],"Возможно, «алмазная планета».","В 2012 году предположили, что она богата углеродом. Позже гипотезу поставили под сомнение. Вот так наука проверяет сама себя."],
+ ["HD 189733 b",["#8fb1ff","#14308f"],["64 световых года","Горячий газовый гигант","Ветры в тысячи км/ч"],"Синяя, но не океан: предполагается, что там идут стеклянные дожди.","Цвет, по-видимому, дают частицы силикатов в атмосфере."],
+ ["WASP-76 b",["#ffb86b","#8a1d12"],["Около 640 световых лет","Ночью дождь","Днём свыше 2000 °C"],"Считается, что на ночной стороне идёт дождь из расплавленного железа.","Железо испаряется на жаркой стороне и конденсируется на холодной."],
+ ["WASP-12 b",["#ff9c6b","#7d1b24"],["Около 1300 световых лет","Год чуть больше суток","Форма яйца"],"Звезда растягивает планету до формы яйца.","Планета постепенно теряет вещество и разрушается."],
+ ["TRAPPIST-1",["#ffc4a3","#8f2f2a"],["40 световых лет","Семь планет","Красный карлик"],"Семь землеподобных миров у одной звезды.","Несколько из них лежат в зоне, где теоретически может быть жидкая вода."],
+ ["Kepler-16 b",["#ffe4a8","#e36a2b"],["Около 245 световых лет","Две звезды","Год 229 суток"],"Настоящий «Татуин»: два солнца на небе.","Планета обращается вокруг двойной звёздной системы."],
+ ["Блуждающие планеты",["#6d7bd9","#141a52"],["Нет звезды","Вечная тьма","Миллиарды в Галактике?"],"Миры, которые летят сквозь межзвёздную тьму без звезды.","Их выбросило из родных систем или они родились сами по себе. Увидеть их очень трудно."]]},
+
+{id:"stars",t:"Звёзды",d:"от 4 световых лет",
+ i:"Звёзды рождаются в газовых облаках, живут миллионы или триллионы лет и по-разному умирают.",
+ c:[
+ ["Бетельгейзе",["#ffd1a0","#c2391f"],["Около 550 световых лет","Красный сверхгигант","Скоро (по-звёздному) взорвётся"],"Поставьте её на место Солнца, и она заполнит пространство примерно до орбиты Юпитера.","Взорвётся она не завтра: срок исчисляется тысячами и десятками тысяч лет."],
+ ["Нейтронные звёзды",["#d6e8ff","#3d63c9"],["Диаметр около 20 км","Масса больше Солнца","Остаток сверхновой"],"Чайная ложка вещества нейтронной звезды весит около миллиарда тонн.","Вещество сжато так сильно, что атомы разрушены."],
+ ["Пульсары",["#ffffff","#5aa9ff"],["Сотни оборотов в секунду","Вращающаяся нейтронная звезда","Космический маяк"],"Самые быстрые пульсары делают сотни оборотов за секунду.","Мы видим вспышку, когда луч излучения проходит мимо Земли."],
+ ["Магнетары",["#e9c9ff","#6a2fc2"],["Нейтронные звёзды","Сильнейшие магнитные поля","Мощные вспышки"],"Магнитные поля магнетаров сильнейшие из известных во Вселенной.","Их вспышки иногда фиксируют приборы даже в нашей системе."],
+ ["Красные карлики",["#ffb09a","#8f2a2a"],["Самые частые звёзды","Малая масса","Живут триллионы лет"],"Они переживут многие поколения звёзд, подобных Солнцу.","Солнце, жёлтый карлик, лишь средняя звезда."],
+ ["Мы из звёзд",["#fff3b0","#6dc2a2"],["Углерод","Кислород","Железо"],"Атомы в вашем теле образовались в недрах звёзд и при их взрывах.","Звёзд в наблюдаемой Вселенной больше, чем песчинок на всех пляжах Земли."]]},
+
+{id:"gal",t:"Галактики",d:"от 25 000 световых лет",
+ i:"Звёзды собраны в галактики, а те в скопления. Есть спиральные, эллиптические и неправильные.",
+ c:[
+ ["Млечный Путь",["#e8e4ff","#4a3fa0"],["100 000 световых лет","100–400 млрд звёзд","Спираль"],"Солнце делает один оборот вокруг центра Галактики примерно за 230 млн лет.","Мы живём внутри Млечного Пути, поэтому видим его как полосу на небе."],
+ ["Андромеда",["#dfe6ff","#5160c9"],["2,5 млн световых лет","Ближайшая крупная","Видна глазом"],"Её можно увидеть невооружённым глазом в тёмном небе.","Столкновение с Млечным Путём возможно через миллиарды лет, но прогнозы уточняются."],
+ ["IC 1101",["#ffe9c4","#a8741f"],["Около 4 млн световых лет","Эллиптическая","Гигант"],"Одна из крупнейших известных галактик.","Всего галактик во Вселенной сотни миллиардов или больше."],
+ ["Тёмная сторона",["#555a9c","#0a0d2b"],["Обычная материя 5%","Тёмная материя 27%","Тёмная энергия 68%"],"Всё, что мы видим, это лишь около 5% Вселенной.","Остальное пока известно лишь по своему влиянию на движение галактик и расширение Вселенной."]]},
+
+{id:"bh",t:"Чёрные дыры и квазары",d:"от 26 000 световых лет до миллиардов",
+ i:"Места, где гравитация побеждает даже свет, и самые яркие объекты Вселенной.",
+ c:[
+ ["Чёрные дыры",["#ffcf8a","#3a2a70"],["Горизонт событий","Свет не выходит","Время замедляется"],"Чёрная дыра не пылесос: замените Солнце дырой той же массы, и орбиты планет не изменятся.","Радиус такой дыры около 3 км. Вблизи неё время идёт медленнее, чем вдали."],
+ ["Стрелец A*",["#ffd89a","#331d66"],["26 000 световых лет","4 млн масс Солнца","Центр Галактики"],"Изображение M87* получили в 2019 году, а нашей чёрной дыры в 2022-м.","Это сверхмассивная чёрная дыра в центре Млечного Пути."],
+ ["TON 618",["#ffe0a8","#2a1760"],["Миллиарды световых лет","Десятки млрд масс Солнца","Одна из самых массивных"],"Дыра массивнее, чем целые галактики.","Рядом с ней вещество разогревается до яркого свечения."],
+ ["Квазары",["#ffffff","#ff8a3d"],["Ядра далёких галактик","Ярче сотен галактик","Первый нашли в 1963"],"Квазар светит ярче сотен галактик, потому что чёрная дыра поглощает вещество.","Расцвет квазаров пришёлся на эпоху около 10 млрд лет назад. Глядя на них, мы смотрим в прошлое."],
+ ["J0529-4351",["#fff7d6","#ff6b2b"],["Самый яркий известный","Как 500 трлн Солнц","Съедает по Солнцу в сутки"],"Самый яркий из известных квазаров.","Его свет шёл к нам миллиарды лет."]]},
+
+{id:"neb",t:"Туманности",d:"от 700 световых лет",
+ i:"Облака газа и пыли: колыбели новых звёзд и памятники умерших.",
+ c:[
+ ["Туманность Ориона",["#ffc9ef","#7b2d8f"],["1300 световых лет","Видна глазом","Рождение звёзд"],"Её видно невооружённым глазом в «мече» Ориона, и прямо сейчас там рождаются звёзды.","Это одна из ближайших звёздных колыбелей."],
+ ["Крабовидная",["#ffb08f","#2b4aa8"],["Около 6500 световых лет","Вспышка в 1054 году","Пульсар в центре"],"Остаток сверхновой, вспыхнувшей в 1054 году и записанной китайскими астрономами.","В центре туманности вращается пульсар."],
+ ["Столпы Творения",["#ffd3a3","#7a3a1f"],["Туманность Орла","Колонны в несколько световых лет","Снимки «Хаббла» и JWST"],"Колонны газа высотой в световые годы, внутри них рождаются звёзды.","Знаменитый снимок «Хаббла» позже переснял телескоп JWST."],
+ ["Улитка (Helix)",["#b8f4ff","#c2461f"],["Около 650 световых лет","Планетарная туманность","«Глаз Бога»"],"Планетарные туманности не имеют отношения к планетам.","Это сброшенные оболочки умирающих звёзд. Такая судьба ждёт Солнце через ~5 млрд лет."]]}
+];
+
+const R=[
+["«Вояджер-1»",["#e9e4d0","#7a6f55"],["Более 24 млрд км","Запуск в 1977","Самый далёкий"],"Самый удалённый рукотворный объект.","Он давно покинул границу влияния Солнца и летит в межзвёздном пространстве."],
+["Свет",["#ffffff","#5aa9ff"],["300 000 км/с","8 минут от Солнца","4 года от ближайшей звезды"],"Самая быстрая вещь во Вселенной, но и ей нужны годы до соседних звёзд.","Поэтому телескоп всегда показывает прошлое."],
+["Parker Solar Probe",["#ffe9b0","#e0701a"],["Около 690 000 км/ч","~6 млн км до Солнца","Самый быстрый зонд"],"Рукотворный аппарат, который быстрее всех на свете и ближе всех подошёл к Солнцу.","Передняя сторона теплового щита нагревается примерно до 1400 °C, а приборы за ним остаются почти при комнатной температуре."],
+["Звёзды Вольфа — Райе",["#bfe3ff","#2a5fe0"],["Свыше 200 000 °C","Огромная яркость","Короткая жизнь"],"Одни из самых горячих звёзд: их поверхность в десятки раз горячее солнечной.","Они сбрасывают мощный звёздный ветер и заканчивают жизнь взрывом сверхновой."],
+["Туманность Бумеранг",["#ffd6f2","#5b2b9a"],["Около 5000 световых лет","Около −272 °C","Холоднее фона космоса"],"Одно из самых холодных известных естественных мест: около 1 К над абсолютным нулём.","Газ расширяется так быстро, что остывает ниже температуры реликтового излучения (2,7 К).","n"],
+["JADES-GS-z14-0",["#ffd9a8","#b3451f"],["Свет шёл около 13,5 млрд лет","Тусклая и юная","Найдена JWST"],"Одна из самых далёких известных галактик: мы видим её вскоре после Большого взрыва.","Рекорды дальности обновляются быстро: JWST регулярно находит всё более древние галактики.","g"],
+["Пустота в Волопасе",["#8a93ff","#1a1f6b"],["Около 330 млн световых лет","Почти нет галактик","Одна из крупнейших"],"Гигантская область, где галактик гораздо меньше обычного.","Вселенная похожа на пену: галактики лежат на нитях вокруг огромных пустот.","n"],
+["Реликтовое излучение",["#ffb3a0","#3a3fd0"],["380 000 лет после Большого взрыва","2,7 К","Вселенной 13,8 млрд лет"],"Самый древний свет, который мы можем увидеть, приходит со всех сторон неба.","Этот «детский снимок» Вселенной показал, что в начале она была почти однородной.","n"],
+["Наблюдаемая Вселенная",["#c9c4ff","#3b2f91"],["Около 93 млрд световых лет","Сотни млрд галактик","Расширяется"],"Мы видим лишь ту часть Вселенной, свет которой успел до нас дойти.","Размер больше возраста Вселенной, потому что само пространство расширяется.","g"]];
+
+const Q=[
+["Что даёт красный цвет Марсу?",["Лава","Оксид железа (ржавчина)","Красные водоросли"],1],
+["Какая планета горячее всех?",["Меркурий","Венера","Юпитер"],1],
+["Какую долю массы Солнечной системы содержит Солнце?",["Около 50%","Около 90%","Около 99,86%"],2],
+["Что произойдёт с орбитами, если Солнце заменить чёрной дырой той же массы?",["Не изменятся","Планеты упадут","Орбиты сместятся к Солнцу"],0],
+["Из чего вещество в вашем теле?",["Из звёздного вещества","Только из земных элементов","Из тёмной материи"],0]];
+
+/* ===== Рендер ===== */
+const el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e};
+const K={sun:"p",exo:"p",stars:"p",gal:"g",bh:"b",neb:"n"};
+const TR={а:"a",б:"b",в:"v",г:"g",д:"d",е:"e",ё:"e",ж:"zh",з:"z",и:"i",й:"y",к:"k",л:"l",м:"m",н:"n",о:"o",п:"p",р:"r",с:"s",т:"t",у:"u",ф:"f",х:"h",ц:"ts",ч:"ch",ш:"sh",щ:"sch",ъ:"",ы:"y",ь:"",э:"e",ю:"yu",я:"ya"};
+const slug=n=>[...n.toLowerCase()].map(c=>TR[c]??(/[a-z0-9]/.test(c)?c:"-")).join("").replace(/-+/g,"-").replace(/^-|-$/g,"");
+const SL=[];
+/* Картинки рисуются кодом (без авторских прав). Если рядом лежит img/<имя>.jpg, он ложится поверх. */
+function paint(cv,k,c,name){
+ const W=cv.width,H=cv.height,g=cv.getContext("2d"),cx=W/2,cy=H/2;let s=0;for(const ch of name)s=(s*31+ch.charCodeAt(0))>>>0;
+ const r=()=>(s=(s*1664525+1013904223)>>>0)/4294967296;
+ const glow=(x,y,R,col,al)=>{const q=g.createRadialGradient(x,y,0,x,y,R);q.addColorStop(0,col);q.addColorStop(1,"transparent");g.globalAlpha=al;g.fillStyle=q;g.fillRect(x-R,y-R,2*R,2*R);g.globalAlpha=1};
+ g.fillStyle="#050818";g.fillRect(0,0,W,H);g.fillStyle="#fff";
+ for(let i=0;i<W*H/2500;i++){g.globalAlpha=.3+r()*.7;g.fillRect(r()*W,r()*H,r()*1.6+.4,r()*1.6+.4)}
+ g.globalAlpha=1;
+ if(k==="p"){const R=H*.32,sat=name==="Сатурн",rg=[...Array(6)].map(()=>[.25+r()*.45,3+r()*5]);glow(cx,cy,R*2.2,c[1],.45);
+  const ring=a=>{g.strokeStyle=c[0];rg.forEach((q,i)=>{g.globalAlpha=q[0];g.lineWidth=q[1];g.beginPath();g.ellipse(cx,cy,R*(1.5+i*.12),R*(.4+i*.03),-.35,0,a);g.stroke()});g.globalAlpha=1};
+  if(sat)ring(6.3);
+  g.save();g.beginPath();g.arc(cx,cy,R,0,6.3);g.clip();
+  const q=g.createRadialGradient(cx-R*.4,cy-R*.4,R*.1,cx,cy,R*1.1);q.addColorStop(0,c[0]);q.addColorStop(.7,c[1]);q.addColorStop(1,"#000");g.fillStyle=q;g.fillRect(cx-R,cy-R,2*R,2*R);
+  for(let y=cy-R;y<cy+R;y+=3+r()*9){g.globalAlpha=.05+r()*.12;g.fillStyle=r()>.5?"#000":"#fff";g.fillRect(cx-R,y,2*R,2+r()*8)}
+  g.globalAlpha=1;const sh=g.createRadialGradient(cx-R*.5,cy-R*.4,R*.4,cx,cy,R*1.05);sh.addColorStop(0,"transparent");sh.addColorStop(1,"rgba(0,0,12,.8)");g.fillStyle=sh;g.fillRect(cx-R,cy-R,2*R,2*R);g.restore();
+  if(sat)ring(Math.PI)}
+ else if(k==="g"){glow(cx,cy,H*.6,c[1],.5);
+  for(let i=0;i<1800;i++){const t=r()*3.2,a=t*2.2+(i%2)*Math.PI,d=t*H*.2+(r()-.5)*H*.07*(t+.5),x=Math.cos(a)*d*1.6,y=Math.sin(a)*d*.55,o=-.4;
+   g.globalAlpha=.25+r()*.6;g.fillStyle=r()>.4?c[0]:c[1];g.fillRect(cx+x*Math.cos(o)-y*Math.sin(o),cy+x*Math.sin(o)+y*Math.cos(o),1.6,1.6)}
+  g.globalAlpha=1;glow(cx,cy,H*.2,c[0],.9)}
+ else if(k==="n"){g.globalCompositeOperation="lighter";for(let i=0;i<22;i++)glow(r()*W,r()*H,H*(.2+r()*.4),r()>.5?c[0]:c[1],.25);
+  g.globalCompositeOperation="source-over";for(let i=0;i<14;i++)glow(r()*W,r()*H,6,"#fff",1)}
+ else{glow(cx,cy,H*.9,c[1],.35);const R=H*.17;g.save();g.translate(cx,cy);g.rotate(-.25);g.strokeStyle=c[0];
+  for(let i=0;i<14;i++){g.globalAlpha=.6-i*.04;g.lineWidth=2;g.beginPath();g.ellipse(0,0,R*(1.3+i*.22),R*(.28+i*.045),0,0,6.3);g.stroke()}
+  g.globalAlpha=.9;g.lineWidth=3;g.beginPath();g.ellipse(0,-R*.1,R*1.45,R*.95,0,Math.PI,0);g.stroke();
+  g.globalAlpha=1;g.fillStyle="#000";g.beginPath();g.arc(0,0,R,0,6.3);g.fill();g.lineWidth=2.5;g.stroke();g.restore()}
+}
+function pic(x,k,w,h){const d=el("div","pic"),cv=el("canvas");cv.width=w;cv.height=h;paint(cv,k,x[1],x[0]);d.append(cv);
+ const im=new Image();im.alt=x[0];im.onerror=()=>im.remove();im.src="img/"+slug(x[0])+".jpg";d.append(im);return d}
+const chips=x=>x[2].map(s=>`<li>${s}</li>`).join("");
+const dlg=document.getElementById("dlg"),dc=document.getElementById("dc");
+dlg.onclick=e=>{if(e.target===dlg||e.target.closest(".x"))dlg.close()};
+function open(x,k){dc.innerHTML="";dc.append(pic(x,k,800,450));
+ dc.append(el("div","body",`<h2>${x[0]}</h2><ul class="st">${chips(x)}</ul><p class="hook">${x[3]}</p><p class="full">${x[4]}</p>`));
+ dlg.style.setProperty("--a",x[1][0]);dlg.style.setProperty("--b",x[1][1]);dlg.showModal()}
+const card=(x,k)=>{k=x[5]||k||"p";SL.push(slug(x[0])+".jpg");
+ const a=el("article","card",`<div class="body"><h3>${x[0]}</h3><ul class="st">${chips(x)}</ul><p class="hook">${x[3]}</p></div>`);
+ a.style.setProperty("--a",x[1][0]);a.style.setProperty("--b",x[1][1]);a.tabIndex=0;a.setAttribute("role","button");
+ const p=pic(x,k,400,225);p.insertAdjacentHTML("beforeend",`<div class="more"><p>${x[4]}</p></div>`);a.prepend(p);
+ a.onclick=()=>open(x,k);a.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();open(x,k)}};return a};
+const main=document.getElementById("main"),nav=document.getElementById("nav");
+S.forEach(s=>{const sec=el("section",null,`<h2>${s.t}</h2><p class="in">${s.i}</p>`);sec.id=s.id;sec.dataset.dist=s.d;
+ const g=el("div",s.strip?"strip":"grid");s.c.forEach(x=>g.append(card(x,K[s.id])));sec.append(g);main.append(sec);
+ nav.append(Object.assign(el("a",null,s.t.split(" ")[0]==="Далёкие"?"Экзопланеты":s.t.split(" ")[0]),{href:"#"+s.id}))});
+nav.append(Object.assign(el("a",null,"Рекорды"),{href:"#records"}));
+const recs=document.getElementById("recs");R.forEach(x=>recs.append(card(x)));
+
+/* ===== Шкала расстояния ===== */
+const out=document.querySelector("#dist b");
+const secs=[document.getElementById("top"),...document.querySelectorAll("section")];
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){out.textContent=e.target.dataset.dist;
+ nav.querySelectorAll("a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+e.target.id))}}),{rootMargin:"-45% 0px -50% 0px"});
+secs.forEach(s=>io.observe(s));
+
+/* ===== Викторина ===== */
+let qi=0,sc=0;const qz=document.getElementById("quiz");
+function ask(){
+ if(qi>=Q.length){qz.innerHTML=`<h3>Ваш результат: ${sc} из ${Q.length}</h3><p>${sc>=4?"Отличный полёт!":"Перечитайте карточки выше и попробуйте снова."}</p>`;
+  const b=el("button","btn","Пройти ещё раз");b.onclick=()=>{qi=0;sc=0;ask()};qz.append(b);return}
+ const q=Q[qi];qz.innerHTML=`<h3>Вопрос ${qi+1} из ${Q.length}. ${q[0]}</h3><div class="opts"></div><div id="fb" aria-live="polite"></div>`;
+ const o=qz.querySelector(".opts");
+ q[1].forEach((t,i)=>{const b=el("button",null,t);b.onclick=()=>{
+  o.querySelectorAll("button").forEach((x,j)=>{x.disabled=true;if(j===q[2])x.classList.add("ok")});
+  if(i===q[2]){sc++;qz.querySelector("#fb").textContent="Верно!"}else{b.classList.add("no");qz.querySelector("#fb").textContent="Не совсем. Правильный ответ выделен."}
+  const n=el("button","btn",qi+1<Q.length?"Дальше":"Результат");n.onclick=()=>{qi++;ask()};qz.append(n)};o.append(b)})}
+ask();
+
+/* ===== Звёздное небо (рисуется кодом, без картинок) ===== */
+const cv=document.getElementById("sky"),cx=cv.getContext("2d");let st=[];
+const calm=matchMedia("(prefers-reduced-motion:reduce)").matches;
+function size(){cv.width=cv.offsetWidth;cv.height=cv.offsetHeight;st=Array.from({length:Math.round(cv.width*cv.height/5000)},()=>({x:Math.random()*cv.width,y:Math.random()*cv.height,r:Math.random()*1.4+.2,p:Math.random()*6}))}
+function draw(t){cx.clearRect(0,0,cv.width,cv.height);st.forEach(s=>{cx.globalAlpha=.4+.6*Math.abs(Math.sin(s.p+t/1800));cx.fillStyle="#fff";cx.beginPath();cx.arc(s.x,s.y,s.r,0,6.3);cx.fill()});if(!calm)requestAnimationFrame(draw)}
+addEventListener("resize",()=>{size();if(calm)draw(0)});size();draw(0);
+console.log("Свои фото можно положить в папку img/ под такими именами:\n"+SL.join("\n"));
+</script>
+</body>
+</html>
